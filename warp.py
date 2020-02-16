@@ -14,7 +14,6 @@ space = pygame.display.set_mode((WIDTH, HEIGHT))
 
 #define properties of a star
 class Star(object):
-	"""docstring for star"""
 	def __init__(self, x, y):
 		self.x = x
 		self.y = y
@@ -30,14 +29,10 @@ class Star(object):
 		self.Color = (255 - 3*self.z, 255 - 3*self.z, 255 - 3*self.z)
 		self.line = 0
 
-	def draw(self, space):
-		pygame.draw.circle(space, self.Color, (self.x, self.y), 7)
-		# pygame.display.update()
-
 	def move(self):
 		self.x += int(self.z)*self.quadrant
 		self.y = int((self.dx)*self.m) + HEIGHT//2
-		pygame.draw.line(space, self.Color, (self.px, self.py), (self.x, self.y), 3)
+		pygame.draw.line(space, self.Color, (self.px, self.py), (self.x, self.y), 1)
 		pygame.display.update()
 		self.dx = self.x - WIDTH//2
 		self.dy = self.y - HEIGHT//2
@@ -54,7 +49,6 @@ stars = []
 starCount = 100
 for i in range(starCount):
 	stars.append( Star(random.randint(10,WIDTH), random.randint(10,HEIGHT)) )
-	#stars[i].draw(space)
 
 driving = True
 while driving:
@@ -65,7 +59,6 @@ while driving:
 		if (stars[i].x < 0 or stars[i]. x > WIDTH):
 			stars.pop(stars.index(stars[i]))
 			stars.append( Star(random.randint(10,WIDTH), random.randint(10,HEIGHT)) )
-		# stars[i].draw(space)
 		stars[i].move()
 	pygame.display.update()
 
