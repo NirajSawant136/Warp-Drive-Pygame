@@ -30,7 +30,6 @@ class Star(object):
 
 	def draw(self, space):
 		pygame.draw.circle(space, self.Color, (self.x, self.y), 7)
-		# pygame.display.update()
 
 	def move(self):
 		self.x += int(self.z)*self.quadrant
@@ -46,7 +45,7 @@ class Star(object):
 stars = []
 starCount = 500
 for i in range(starCount):
-	stars.append( Star(random.randint(10,900), random.randint(10,550)) )
+	stars.append( Star(random.randint(10,1100), random.randint(10,750)) )
 	stars[i].draw(space)
 
 driving = True
@@ -57,9 +56,11 @@ while driving:
 	for i in range(starCount):
 		if (stars[i].x < 0 or stars[i]. x > WIDTH):
 			stars.pop(stars.index(stars[i]))
-			stars.append( Star(random.randint(10,900), random.randint(10,550)) )
+			stars.append( Star(random.randint(10,1100), random.randint(10,750)) )
 		stars[i].draw(space)
 		stars[i].move()
+
+	pygame.draw.circle(space, (0,0,0),(WIDTH//2, HEIGHT//2),70)
 	pygame.display.update()
 
 	for event in pygame.event.get():
