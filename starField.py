@@ -25,11 +25,11 @@ class Star(object):
 		self.quadrant = 1
 		if self.dx < 0:
 			self.quadrant = -1
-		self.Color = (15*self.z, 15*self.z, 15*self.z)
-		
+		self.Color = (150, 150, 150)
+		self.r = 0
 
 	def draw(self, space):
-		pygame.draw.circle(space, self.Color, (self.x, self.y), 7)
+		pygame.draw.circle(space, self.Color, (self.x, self.y), int(self.r))
 
 	def move(self):
 		self.x += int(self.z)*self.quadrant
@@ -37,6 +37,8 @@ class Star(object):
 		self.dx = self.x - WIDTH//2
 		self.dy = self.y - HEIGHT//2
 		self.z = 0.02*math.sqrt( (self.dx)**2 + (self.dy)**2 )
+		if not(500 < self.x < 700 and 200 < self.y < 500):
+			self.r += 0.1
 			
 		
 
@@ -44,6 +46,7 @@ class Star(object):
 # star = Star(340, 376)
 stars = []
 starCount = 500
+
 for i in range(starCount):
 	stars.append( Star(random.randint(10,1100), random.randint(10,750)) )
 	stars[i].draw(space)
